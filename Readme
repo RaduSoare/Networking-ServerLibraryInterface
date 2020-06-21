@@ -1,27 +1,3 @@
-============================================================================
-Soare Radu-Georgian
-323CD
-Tema3-PC
-============================================================================
-
-
-* Implementarea porneste de la scheletul oferit pentru laboratorul 10. 
-* Am modificat fisierele din schelet, adaugand o metoda pentru creearea
-unui DELETE request si adaugand la fiecare functie ce creeaza
-request-uri, un parametru ce retine tokenul JWT care sa demonstreze
-autorizarea pentru acces la biblioteca.
-* Am folosit biblioteca Parson pentru facilitarea conversiei datelor in
-format JSON, pentru a elimina riscul omisiunii de newline-uri sau spatii.
-* Pentru afisarea erorilor am preferat sa extrag din mesajul de la server
-eroarea indetificata de acesta si sa o afisez utilizatorului, pastrand
-activa conexiunea.
-* Dupa fiecare comanda reusita se afiseaza un mesaj care sa confirme
-acest lucru clientului.
-* Am implementat cazurile de comenzi ce au nevoie de autorizare si nu
-au primit-o inca, astfel incat sa nu mai afiseze prompt-ul clientului si
-sa nu mai trimita request catre server, deoarece am considerat redundanta
-trimiterea unui request despre care se stie ca este gresit (incomplet).
-
  -- Comenzi implementate --
 
  1. register
