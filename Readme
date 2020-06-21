@@ -1,0 +1,66 @@
+============================================================================
+Soare Radu-Georgian
+323CD
+Tema3-PC
+============================================================================
+
+
+* Implementarea porneste de la scheletul oferit pentru laboratorul 10. 
+* Am modificat fisierele din schelet, adaugand o metoda pentru creearea
+unui DELETE request si adaugand la fiecare functie ce creeaza
+request-uri, un parametru ce retine tokenul JWT care sa demonstreze
+autorizarea pentru acces la biblioteca.
+* Am folosit biblioteca Parson pentru facilitarea conversiei datelor in
+format JSON, pentru a elimina riscul omisiunii de newline-uri sau spatii.
+* Pentru afisarea erorilor am preferat sa extrag din mesajul de la server
+eroarea indetificata de acesta si sa o afisez utilizatorului, pastrand
+activa conexiunea.
+* Dupa fiecare comanda reusita se afiseaza un mesaj care sa confirme
+acest lucru clientului.
+* Am implementat cazurile de comenzi ce au nevoie de autorizare si nu
+au primit-o inca, astfel incat sa nu mai afiseze prompt-ul clientului si
+sa nu mai trimita request catre server, deoarece am considerat redundanta
+trimiterea unui request despre care se stie ca este gresit (incomplet).
+
+ -- Comenzi implementate --
+
+ 1. register
+ - citeste in cate un buffer userul si parola, nu exista constrangeri
+ in ceea ce priveste formatarea acestora
+ - se converteste in format JSON si le adauga in request-ul HTTP
+ - afiseaza mesaj de confirmare a actiunii
+
+ 2. login
+ - verifica daca flagul de "online" este setat, daca nu este, atunci
+ permite autentificarea clientului
+ - acelasi mecanism de prelucrare a datelor ca la comanda Register
+ - daca login-ul se realizeaza cu succes, se retine cookie-ul, pentru
+ a permite clientului sa dovedeasca faptul ca este logat
+
+ 3. enter_library
+ - daca se permite accesul la biblioteca, se extrage tokenul primit
+ in raspunsul de la server pentru a dovedi accesul
+
+ 4. get_books
+ - se dovedeste accesul la biblioteca adaugand in request tokenul 
+ - se prelucreaza mesajul JSON primit astfel incat sa se afiseze
+ fiecare carte si id-ul sau pe un rand separat
+
+ 5. get_book
+  - se dovedeste accesul la biblioteca adaugand in request tokenul 
+  - se citeste id-ul cartii de care e interesat clientul si se 
+  concateneaza la url-ul corespunzator
+  - se afiseaza datele despre carte pe linii separate
+
+ 6. add_book
+ - se dovedeste accesul la biblioteca adaugand in request tokenul 
+ - se citesc datele cartii introduse de client
+ - se convertesc datele in format JSON si se adauga la request
+
+ 7. delete_book
+ - implementare asemanatoare cu get_book
+
+ 8. logout
+ - se golesc bufferele in care retineam tokenul si cookie-ul pentru ca
+ urmatorul user care se logheaza sa nu le poata folosi
+ - se marcheaza serverul ca fiind disponibil pentru o noua conectare
